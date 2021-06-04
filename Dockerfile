@@ -7,7 +7,7 @@ RUN npm install && npm run build
 
 from nginx:stable-alpine
 
-COPY --from=0 $Dir/*.tgz /
+COPY --from=0 $Dir/*.tgz /frontend-qsl.tgz
 EXPOSE 80
-RUN tar xf /duap.tgz -C /usr/share/nginx/html
+RUN tar xf /frontend-qsl.tgz -C /usr/share/nginx/html
 CMD ["nginx","-g","daemon off;"]
