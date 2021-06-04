@@ -2,9 +2,9 @@
 
 module.exports = {
   "plugins": {
-    "autoprefixer": {browsers: 'last 5 version'},
     "postcss-import": {},
     "postcss-url": {},
+    "autoprefixer": {}
     // to edit target browsers: use "browserslist" field in package.json
   }
 }
