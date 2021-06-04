@@ -3,11 +3,11 @@ ARG Dir=/node/qsl
 
 WORKDIR $Dir
 ADD . $Dir
-RUN npm install && npm run build
+RUN npm install && nohup npm run build &
+RUN tar zcvf dist.tar.gz $Dir/dist
 
-from nginx:stable-alpine
-
-COPY --from=0 $Dir/*.tgz /frontend-qsl.tgz
+FROM nginx:stable-alpine
+COPY --from=0 $Dir/dist.tar.gz /
 EXPOSE 80
-RUN tar xf /frontend-qsl.tgz -C /usr/share/nginx/html
+RUN tar xf /dist.tar.gz -C /usr/share/nginx/html
 CMD ["nginx","-g","daemon off;"]
